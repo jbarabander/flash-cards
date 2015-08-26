@@ -7,9 +7,11 @@
         <link rel="stylesheet" type="text/css" href="style.css" />
     </head>
     <body ng-app="flashCards" ng-controller="MainController">
+      <button class="category-button" ng-repeat='category in categories' ng-click='getCategoryCards(category)' ng-class="{active: clickedCategory === category}">{{ category }}</button>
+      <button class="category-button" ng-click='getCategoryCards()'>Reset</button>
     	<div
     		ng-repeat="flashCard in flashCards | orderBy : 'question'"
-    		class="flash-card">
+    		class="flash-card" ng-class="flashCard.category">
     	    <h1>{{ flashCard.question | uppercase }}</h1>
     	    <ul class="flash-card-answers">
     	    	<li
