@@ -9,11 +9,24 @@
 // 	}
 // });
 
-app.controller('MainController', function ($scope, FlashCardsFactory) {
-	FlashCardsFactory.getFlashCards().then(function(result) {
-		$scope.flashCards = result;
+app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFactory) {
+		$scope.answerQuestion = function (answer, flashCard) {
+			if (!flashCard.answered) {
+				flashCard.answered = true;
+				flashCard.answeredCorrectly = answer.correct;
+				if(answer.correct) ScoreFactory.correct++;
+				else ScoreFactory.incorrect++;
+			}
+		}
+		function goFlashCards(category) {
+			$scope.clickedCategory = category;
+			FlashCardsFactory.getFlashCards(category).then(function(result) {
+				$scope.flashCards = result;
+			});
+		}
+
+		goFlashCards();
 		// console.log($scope.flashCards);
-	});
 
 	$scope.categories = [
     'MongoDB',
@@ -23,10 +36,7 @@ app.controller('MainController', function ($scope, FlashCardsFactory) {
 	];
 
 	$scope.getCategoryCards = function(category) {
-		$scope.clickedCategory = category;
-		FlashCardsFactory.getFlashCards(category).then(function(result) {
-			$scope.flashCards = result;
-		});
+		goFlashCards(category)
 	};
 
 	// $scope.flashCards = whateverName;
