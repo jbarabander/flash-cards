@@ -15,10 +15,12 @@
     	<div
     		ng-repeat="flashCard in flashCards | orderBy : 'question'"
     		class="flash-card" ng-class="flashCard.category">
+          <h3>{{flashCard.category}}</h3>
+          <hr>
     	    <h1>{{ flashCard.question | uppercase }}</h1>
     	    <ul class="flash-card-answers">
     	    	<li
-    	    		ng-repeat="answer in flashCard.answers"
+    	    		ng-repeat="answer in flashCard.answers | cheat"
     	    		class="flash-card-answer"
     	    		ng-click="answerQuestion(answer, flashCard)">{{ answer.text }}</li>
     	    </ul>
