@@ -3,7 +3,7 @@ app.factory('FlashCardsFactory', function ($http) {
       getFlashCards: function(category) {
           var queryParams = {};
           if(category) queryParams.category = category;
-          return $http.get('/cards', {params: queryParams}).then(function(response){
+          return $http.get('/cards', {params: queryParams}).then(function(response) {
             return response.data;
         });
       }

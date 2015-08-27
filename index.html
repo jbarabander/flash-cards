@@ -9,12 +9,16 @@
     <body ng-app="flashCards">
       <div class='stats' ng-include="'templates/stats.html'"></div>
 
+
     <div ng-controller="MainController">
-      <button class="category-button" ng-repeat='category in categories' ng-click='getCategoryCards(category)' ng-class="{active: clickedCategory === category}">{{ category }}</button>
-      <button class="category-button" ng-click='getCategoryCards()'>Reset</button>
-    	<div
+      <div class="button-holder">
+        <button class="category-button" ng-repeat='category in categories' ng-click='getCategoryCards(category)' ng-class="{active: clickedCategory === category}">{{ category }}</button>
+        <button class="category-button" ng-click='getCategoryCards()'>Reset</button>
+      </div>
+      <div class='loader-holder'><loader ng-show='showSpinner'></loader></div>
+    	<!-- <div
     		ng-repeat="flashCard in flashCards | orderBy : 'question'"
-    		class="flash-card" ng-class="flashCard.category">
+    		class="flash-card" ng-class="flashCard.category" ng-show='!showSpinner'>
           <h3>{{flashCard.category}}</h3>
           <hr>
     	    <h1>{{ flashCard.question | uppercase }}</h1>
@@ -31,10 +35,14 @@
     	        <span ng-show="flashCard.answeredCorrectly">Yeah, you got it right!</span>
     	        <span ng-show="!flashCard.answeredCorrectly">Nope, you got it wrong.</span>
     	    </h2>
-    	</div>
+    	</div> -->
+      <flash-card ng-repeat="entry in flashCards | orderBy : 'question'" card='entry'></flash-card>
     </div>
     	<script src="js/lib/angular.js"></script>
     	<script src="js/app.js"></script>
+      <script src="js/directives/loader/loader.js"></script>
+      <script src="js/directives/border-on-hover/border-on-hover.js"></script>
+      <script src="js/directives/flash-card/flash-card.js"></script>
       <script src="js/factories/ScoreFactory.js"></script>
       <script src="js/factories/FlashCardsFactory.js"></script>
     	<script src="js/controllers/main.controller.js"></script>

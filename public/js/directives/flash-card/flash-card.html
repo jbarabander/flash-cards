@@ -1,0 +1,21 @@
+<div class="flash-card" ng-class="flashCard.category" ng-show='!showSpinner'>
+    <h3>{{flashCard.category}}</h3>
+    <hr>
+    <h1>{{ flashCard.question | uppercase }}</h1>
+    <ul class="flash-card-answers">
+      <li
+        ng-repeat="answer in flashCard.answers"
+        class="flash-card-answer" border-on-hover
+        ng-click="answerQuestion(answer)">{{ answer.text }}</li>
+    </ul>
+    <h2
+      class="answer-feedback"
+      ng-class="flashCard.answeredCorrectly ? 'correct' : 'incorrect'"
+      ng-show="flashCard.answered">
+        <span ng-show="flashCard.answeredCorrectly">Yeah, you got it right!</span>
+        <span ng-show="!flashCard.answeredCorrectly">Nope, you got it wrong.</span>
+    </h2>
+</div>
+
+
+        <!-- ng-repeat="answer in flashCard.answers | cheat" -->

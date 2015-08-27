@@ -12,6 +12,13 @@
   box-sizing: border-box;
 }
 
+.loader-holder {
+  text-align: center;
+}
+.button-holder {
+  text-align: center;
+}
+
 .category-button {
   border: 1px solid black;
   background:none;
@@ -75,6 +82,10 @@
   &.incorrect {
     color: red;
   }
+}
+
+.border-enter {
+  border: 2px solid black !important;
 }
 
 #statistics {

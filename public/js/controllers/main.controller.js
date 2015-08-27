@@ -10,18 +10,21 @@
 // });
 
 app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFactory) {
-		$scope.answerQuestion = function (answer, flashCard) {
-			if (!flashCard.answered) {
-				flashCard.answered = true;
-				flashCard.answeredCorrectly = answer.correct;
-				if(answer.correct) ScoreFactory.correct++;
-				else ScoreFactory.incorrect++;
-			}
-		}
+		$scope.showSpinner = false;
+		// $scope.answerQuestion = function (answer, flashCard) {
+		// 	if (!flashCard.answered) {
+		// 		flashCard.answered = true;
+		// 		flashCard.answeredCorrectly = answer.correct;
+		// 		if(answer.correct) ScoreFactory.correct++;
+		// 		else ScoreFactory.incorrect++;
+		// 	}
+		// }
 		function goFlashCards(category) {
-			$scope.clickedCategory = category;
+			$scope.showSpinner = true;
 			FlashCardsFactory.getFlashCards(category).then(function(result) {
+				$scope.clickedCategory = category;
 				$scope.flashCards = result;
+				$scope.showSpinner = false;
 			}).catch(console.error);
 		}
 
