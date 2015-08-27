@@ -22,7 +22,7 @@ app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFacto
 			$scope.clickedCategory = category;
 			FlashCardsFactory.getFlashCards(category).then(function(result) {
 				$scope.flashCards = result;
-			});
+			}).catch(console.error);
 		}
 
 		goFlashCards();
